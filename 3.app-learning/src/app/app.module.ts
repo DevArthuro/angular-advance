@@ -6,17 +6,22 @@ import { AppComponent } from './app.component';
 import { CounterComponent } from './counter/counter.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { ValuesComponent } from './values/values.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CounterComponent,
     ButtonsComponent,
-    ValuesComponent
+    ValuesComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

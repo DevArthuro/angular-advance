@@ -1,0 +1,20 @@
+<div class="form">
+    <h2 class="form__title">Form Users</h2>
+    <section class="form__fields">
+        <article *ngIf="!!messageError" class="form__fields--error-message">
+            {{messageError}}
+        </article>
+            <article class="form__fields--field form__fields--name-field">
+                <label for="name">name</label>
+                <input type="text" id="name" [(ngModel)]="name" placeholder="type your name">
+            </article>
+            <article class="form__fields--field form__fields--email-field">
+                <label for="email">Email</label>
+                <input type="text" id="email" [(ngModel)]="email" placeholder="type your email">
+            </article>
+            <article class="form__fields--field form__fields--button">
+                <button type="button" (click)="sendUser()">Enviar</button>
+            </article>
+
+    </section>
+</div>
