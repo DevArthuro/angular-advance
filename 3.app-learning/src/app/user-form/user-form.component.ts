@@ -8,37 +8,32 @@ import { UsersService } from '../services/users.service';
   styleUrl: './user-form.component.sass',
 })
 export class UserFormComponent {
-  name: string = '';
-  email: string = '';
   messageError: string = '';
 
   constructor(private userService: UsersService) {}
 
-  sendUser() {
-    if (!this.name || !this.email) {
+  sendUser({name, email}: {
+    name: string;
+    email: string
+  }) {
+    if (!name || !email) {
       this.messageError = 'The fields is not fill out';
       return;
     }
-    if (this.getUserExists()) {
+    if (this.getUserExists(email)) {
       this.messageError = 'This user already exists';
-      this.email = "";
+      email = "";
       return;
     }
-    this.resetMessageError()
-    this.userService.setUser({ name: this.name, email: this.email });
+    this.userService.setUser({ name, email });
   }
 
-  private getUserExists(): boolean {
-    const user = this.userService.getUser({ email: this.email });
+  private getUserExists(email: string): boolean {
+    const user = this.userService.getUser({ email });
     if (user) {
       this.messageError = 'User is already exists';
       return true;
     }
-    this.resetMessageError();
     return false;
-  }
-
-  private resetMessageError() {
-    this.messageError = '';
   }
 }

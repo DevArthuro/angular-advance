@@ -1,0 +1,11 @@
+<article class="form__fields--field form__fields--name-field" className="form__fields--name-field">
+    <label for="name">name</label>
+    <input type="text" id="name" [(ngModel)]="name" placeholder="type your name">
+</article>
+<article class="form__fields--field form__fields--email-field" className="form__fields--email-field">
+    <label for="email">email</label>
+    <input type="email" id="email" [(ngModel)]="email" placeholder="type your email"> 
+</article>
+<article class="form__fields--field form__fields--button">
+    <button type="button" (click)="sendData()">Enviar</button>
+</article>

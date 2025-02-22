@@ -8,6 +8,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { ValuesComponent } from './values/values.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FieldsFormComponent } from './fields-form/fields-form.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CounterComponent,
     ButtonsComponent,
     ValuesComponent,
-    UserFormComponent
+    UserFormComponent,
+    FieldsFormComponent
   ],
   imports: [
     BrowserModule,
