@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
+import { Component, computed, signal } from '@angular/core';
 
 interface HeroSchema {
   name: string;
@@ -10,6 +11,7 @@ interface HeroSchema {
   selector: 'app-hero',
   templateUrl: './hero.components.html',
   styleUrl: './hero.component.scss',
+  imports: [UpperCasePipe],
 })
 class HeroComponent {
   heroes: HeroSchema[] = [
@@ -52,14 +54,8 @@ class HeroComponent {
     this.hero.set({
       ...this.heroes[this.currentIndex],
     });
-  }
 
-  resetForm() {
-    this.hero.set({
-      ...this.heroes[0],
-    });
-
-    this.currentIndex = 0;
+    return this.hero;
   }
 
   changeAge() {
@@ -77,13 +73,29 @@ class HeroComponent {
       return hero;
     });
 
-    this.hero.update((value) => ({ ...value, age: value.age += 1 }));
+    this.hero.update((value) => ({ ...value, age: (value.age += 1) }));
 
     this.heroes = newHeroes;
+
+    return this.hero;
   }
 
-  getHeroDescription() {
-    return this.hero().description;
+  getHeroDescription = computed(() => {
+    return `${this.hero().description} - ${this.hero().name} - ${
+      this.hero().age
+    }`;
+  });
+
+  capitalizeName = computed(() => {
+    return this.hero().name.toUpperCase();
+  });
+
+  resetForm() {
+    this.hero.set({
+      ...this.heroes[0],
+    });
+
+    this.currentIndex = 0;
   }
 }
 
