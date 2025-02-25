@@ -1,0 +1,27 @@
+.navbar {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: rgb(4, 4, 63);
+    &__list {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        &--link {
+            list-style: none;
+            a {
+                text-decoration: none;
+                cursor: pointer;
+                font-weight: bolder;
+                font-size: 1.4rem;
+                color: white;
+                transition: 0.4s;
+                &:hover {
+                    border-bottom: 6px white solid;
+                }
+            }
+            .active {
+                color: red;
+            }
+        }
+    }
+}
