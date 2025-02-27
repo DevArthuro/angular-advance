@@ -1,7 +1,7 @@
 <div class="col-12 col-sm-6">
         <h3>Listado</h3>
         <ul>
-            @for (character of characters(); track character.id; let idx = $index) {
+            @for (character of dragonBallService.characters(); track character.id; let idx = $index) {
                 <li>
                     <span>{{idx}}. {{character.name}}</span>
                     <span class="power" [class.text-danger]="character.power > 8500" [class.text-info]="character.power < 8000">({{character.power}})</span>

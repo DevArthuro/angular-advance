@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Character } from '../../../interfaces/dragonball';
+import { DragonballService } from '../../../services/dragonball/dragonball-service.service';
 
 @Component({
   selector: 'app-dragonball-list',
@@ -7,12 +8,10 @@ import { Character } from '../../../interfaces/dragonball';
   styleUrl: './dragonball-list.component.scss'
 })
 export class DragonballListComponent {
-  characters = input.required<Character[]>();
-
-  OnEditCharacter = output<number>()
+  dragonBallService = inject(DragonballService)
   
   editCharacter(id: number) {
-    this.OnEditCharacter.emit(id);
+    this.dragonBallService.activeSelect(id);
   }
 
 }
