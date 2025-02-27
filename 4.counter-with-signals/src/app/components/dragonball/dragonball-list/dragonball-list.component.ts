@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Character } from '../../../interfaces/dragonball';
 
 @Component({
@@ -8,9 +8,11 @@ import { Character } from '../../../interfaces/dragonball';
 })
 export class DragonballListComponent {
   characters = input.required<Character[]>();
+
+  OnEditCharacter = output<number>()
   
   editCharacter(id: number) {
-    console.log(id);
+    this.OnEditCharacter.emit(id);
   }
 
 }

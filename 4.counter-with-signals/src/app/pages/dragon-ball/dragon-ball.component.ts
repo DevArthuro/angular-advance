@@ -7,7 +7,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { DragonballListComponent } from '../../components/dragonball/dragonball-list/dragonball-list.component';
-import { Character } from '../../interfaces/dragonball';
+import { Character, FormCharacter } from '../../interfaces/dragonball';
 import { DragonballAddComponent } from '../../components/dragonball/dragonball-add/dragonball-add.component';
 
 
@@ -55,7 +55,7 @@ export class DragonBallComponent implements OnInit {
     );
   }
 
-  handlerApplyChanges() {
+  handlerApplyChanges({ name, power }: FormCharacter) {
     if (this.isSelectedCharacter()) {
       const findCharacter = this.characters().find(
         (character) => character.selected
@@ -63,7 +63,7 @@ export class DragonBallComponent implements OnInit {
       this.characters.update((prev) =>
         prev.map((character) =>
           character.id === findCharacter.id
-            ? { ...character, name: this.name(), power: Number(this.power()) }
+            ? { ...character, name, power }
             : character
         )
       );
@@ -74,8 +74,8 @@ export class DragonBallComponent implements OnInit {
       ...character,
       {
         id: character.length + 1,
-        name: this.name(),
-        power: Number(this.power()),
+        name,
+        power,
         selected: false,
       },
     ]);
