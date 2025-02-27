@@ -1,4 +1,11 @@
-import { Component, computed, model, OnInit, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  computed,
+  model,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 
 interface Character {
   id: number;
@@ -15,6 +22,8 @@ interface Character {
 })
 export class DragonBallComponent implements OnInit {
   characters = signal<Character[]>([]);
+  name = signal<string>('');
+  power = signal<string>('');
 
   isSelectedCharacter = computed<boolean>(() =>
     this.characters().some((character) => character.selected)
@@ -49,4 +58,29 @@ export class DragonBallComponent implements OnInit {
     );
   }
 
+  handlerApplyChanges() {
+    if (this.isSelectedCharacter()) {
+      const findCharacter = this.characters().find(
+        (character) => character.selected
+      )!;
+      this.characters.update((prev) =>
+        prev.map((character) =>
+          character.id === findCharacter.id
+            ? { ...character, name: this.name(), power: Number(this.power()) }
+            : character
+        )
+      );
+      return;
+    }
+
+    this.characters.update((character) => [
+      ...character,
+      {
+        id: character.length + 1,
+        name: this.name(),
+        power: Number(this.power()),
+        selected: false,
+      },
+    ]);
+  }
 }
