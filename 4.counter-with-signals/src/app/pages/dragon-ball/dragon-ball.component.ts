@@ -6,17 +6,14 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
+import { DragonballListComponent } from '../../components/dragonball/dragonball-list/dragonball-list.component';
+import { Character } from '../../interfaces/dragonball';
+import { DragonballAddComponent } from '../../components/dragonball/dragonball-add/dragonball-add.component';
 
-interface Character {
-  id: number;
-  name: string;
-  power: number;
-  selected: boolean;
-}
 
 @Component({
   selector: 'app-dragon-ball',
-  imports: [],
+  imports: [DragonballListComponent, DragonballAddComponent],
   templateUrl: './dragon-ball.component.html',
   styleUrl: './dragon-ball.component.scss',
 })
