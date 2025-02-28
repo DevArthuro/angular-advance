@@ -1,26 +1,40 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 import { Character, FormCharacter } from '../../interfaces/dragonball';
+
+export enum KEYS_LOCALSTORAGE {
+  LIST_CHARACTERS = "characters"
+}
+
+function loadFromLocalStorage(): Character[] {
+  const characters = localStorage.getItem(KEYS_LOCALSTORAGE.LIST_CHARACTERS);
+
+  if (characters) {
+    return JSON.parse(characters);
+  }
+
+  return [];
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class DragonballService {
-  characters = signal<Character[]>([
-    { id: 0, name: 'Gokú', power: 9000, selected: false },
-    { id: 1, name: 'Vegueta', power: 8300, selected: false },
-    { id: 2, name: 'Picolo', power: 3000, selected: false },
-  ]);
+  characters = signal<Character[]>(loadFromLocalStorage());
 
   isSelectedCharacter = computed<boolean>(() =>
     this.characters().some((character) => character.selected)
   );
 
   character = computed<Character | null>(
-    () =>
-      this
-        .characters()
-        .find((character) => character.selected) ?? null
+    () => this.characters().find((character) => character.selected) ?? null
   );
+
+  saveToLocalStorage = effect(() => {
+    localStorage.setItem(
+      KEYS_LOCALSTORAGE.LIST_CHARACTERS,
+      JSON.stringify(this.characters())
+    );
+  });
 
   constructor() {}
 

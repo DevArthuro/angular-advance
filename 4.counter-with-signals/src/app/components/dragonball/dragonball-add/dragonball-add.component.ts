@@ -25,21 +25,16 @@ export class DragonballAddComponent {
     () => this.name().length === 0 && Number(this.power()) === 0
   );
 
-  character = computed<Character | null>(
-    () =>
-      this.dragonBallService
-        .characters()
-        .find((character) => character.selected) ?? null
-  );
-
   reset() {
     this.dragonBallService.resetSelect();
   }
 
   handlerApplyChanges() {
     this.dragonBallService.handlerApplyChanges({
-      name: this.name() || this.character()!.name,
-      power: Number(this.power()) || Number(this.character()?.power),
+      name: this.name() || this.dragonBallService.character()!.name,
+      power:
+        Number(this.power()) ||
+        Number(this.dragonBallService.character()?.power),
     });
   }
 }

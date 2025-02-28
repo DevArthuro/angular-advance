@@ -2,7 +2,7 @@
         <h3>Listado</h3>
         <ul>
             @for (character of dragonBallService.characters(); track character.id; let idx = $index) {
-                <li>
+                <li [class.text-warning]="dragonBallService.character()?.id === character.id ">
                     <span>{{idx}}. {{character.name}}</span>
                     <span class="power" [class.text-danger]="character.power > 8500" [class.text-info]="character.power < 8000">({{character.power}})</span>
                     <button (click)="editCharacter(character.id)">Editar</button>
