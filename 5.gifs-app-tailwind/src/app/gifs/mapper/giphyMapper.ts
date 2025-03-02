@@ -1,21 +1,19 @@
 import {
   GiphyDataItem,
-  GiphyItemSchema,
+  GIF,
   GiphyResponse,
 } from '../interfaces/giphy.interface';
 
 export class GiphyMapper {
-  static parseGiphyApiToGiphySchema(item: GiphyDataItem): GiphyItemSchema {
+  static parseGiphyApiToGiphySchema(item: GiphyDataItem): GIF {
     return {
       id: item.id,
       title: item.title,
-      url: item.url,
+      url: item.images.original.url,
     };
   }
 
-  static parseDataGiphyToGiphySchema(
-    response: GiphyResponse["data"]
-  ): GiphyItemSchema[] {
+  static parseDataGiphyToGiphySchema(response: GiphyResponse['data']): GIF[] {
     const data = response.map((giphyItem) =>
       this.parseGiphyApiToGiphySchema(giphyItem)
     );

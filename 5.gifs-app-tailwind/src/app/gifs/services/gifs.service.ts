@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { GiphyItemSchema, GiphyResponse } from '../interfaces/giphy.interface';
+import { GIF, GiphyResponse } from '../interfaces/giphy.interface';
 import { environment } from 'src/environments/environment';
 import { GiphyMapper } from '../mapper/giphyMapper';
 
@@ -9,7 +9,7 @@ import { GiphyMapper } from '../mapper/giphyMapper';
 })
 export class GifService {
   http = inject(HttpClient);
-  gifs = signal<GiphyItemSchema[]>([]);
+  gifs = signal<GIF[]>([]);
   load = signal<boolean>(true);
 
   constructor() {
@@ -28,7 +28,8 @@ export class GifService {
       })
       .subscribe((res) => {
         const data = GiphyMapper.parseDataGiphyToGiphySchema(res.data);
-        this.gifs.set(data)
+        console.log(data)
+        this.gifs.set(data);
       });
   }
 }

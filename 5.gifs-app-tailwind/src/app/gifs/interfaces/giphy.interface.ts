@@ -1,6 +1,8 @@
 // Adapt
 
-export type GiphyItemSchema = Pick<GiphyDataItem, "id" | "title" | "url">
+export type GIF = Pick<GiphyDataItem, "id" | "title"> & {
+    url: string
+}
 
 // Api types 
 export interface  GiphyResponse {
