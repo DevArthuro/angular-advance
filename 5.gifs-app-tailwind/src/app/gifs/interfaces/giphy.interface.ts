@@ -1,3 +1,8 @@
+// Adapt
+
+export type GiphyItemSchema = Pick<GiphyDataItem, "id" | "title" | "url">
+
+// Api types 
 export interface  GiphyResponse {
     data:       GiphyDataItem[];
     meta:       Meta;

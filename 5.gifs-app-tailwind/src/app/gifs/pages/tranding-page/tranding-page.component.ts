@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ListComponent } from "../../components/gifs/list/list.component";
+import { GifService } from '../../services/gifs.service';
 
 @Component({
   selector: 'app-tranding-page',
@@ -21,4 +22,6 @@ export default class TrandingPageComponent {
     'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg',
     'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg',
   ];
+
+  giphyItems = inject(GifService)
 }
