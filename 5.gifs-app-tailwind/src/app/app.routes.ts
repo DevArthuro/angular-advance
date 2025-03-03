@@ -9,16 +9,23 @@ export const routes: Routes = [
     children: [
       {
         path: 'trending',
-        loadComponent: () => import('./gifs/pages/tranding-page/tranding-page.component'),
+        loadComponent: () =>
+          import('./gifs/pages/tranding-page/tranding-page.component'),
       },
       {
         path: 'searching',
-        loadComponent: () => import('./gifs/pages/search-page/search-page.component'),
+        loadComponent: () =>
+          import('./gifs/pages/search-page/search-page.component'),
       },
       {
-        path: "**",
-        redirectTo: "trending"
-      }
+        path: 'history/:query',
+        loadComponent: () =>
+          import('./gifs/pages/history-page/history-page.component'),
+      },
+      {
+        path: '**',
+        redirectTo: 'trending',
+      },
     ],
   },
   {

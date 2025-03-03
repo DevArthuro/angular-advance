@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { GIF, GiphyResponse } from '../interfaces/giphy.interface';
 import { environment } from 'src/environments/environment';
 import { GiphyMapper } from '../mapper/giphyMapper';
@@ -12,6 +12,9 @@ export class GifService {
   http = inject(HttpClient);
   gifs = signal<GIF[]>([]);
   load = signal<boolean>(true);
+
+  historySearch = signal<Record<string, GIF[]>>({});
+  keyHistorySearch = computed(() => Object.keys(this.historySearch()))
 
   constructor() {
     this.loadGifs();
@@ -46,8 +49,15 @@ export class GifService {
       .pipe(
         map(({ data }) => GiphyMapper.parseDataGiphyToGiphySchema(data)),
         tap((data) => {
-          console.log(data);
+          this.historySearch.update((prev) => ({
+            ...prev,
+            [querySearch.toLowerCase()]: data,
+          }));
         })
       );
+  }
+
+  getGifBySearchHistory(query: string): GIF[] {
+    return this.historySearch()[query];
   }
 }
