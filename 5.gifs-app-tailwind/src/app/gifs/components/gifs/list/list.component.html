@@ -2,6 +2,6 @@
     @for (item of gifs(); track item.id) {
         <app-item [image]="item.url"/>
     } @empty {
-        <p>¡There is not images preview!</p>
+        <p class="text-black">¡There is not images preview!</p>
     }
 </div>
