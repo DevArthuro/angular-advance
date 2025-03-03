@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { GIF, GiphyResponse } from '../interfaces/giphy.interface';
 import { environment } from 'src/environments/environment';
 import { GiphyMapper } from '../mapper/giphyMapper';
 import { map, tap } from 'rxjs';
+
+export enum KEYS_LOCALSTORAGE {
+  HISTORY_SEARCH = 'historySearch',
+}
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +17,28 @@ export class GifService {
   gifs = signal<GIF[]>([]);
   load = signal<boolean>(true);
 
-  historySearch = signal<Record<string, GIF[]>>({});
-  keyHistorySearch = computed(() => Object.keys(this.historySearch()))
+  historySearch = signal<Record<string, GIF[]>>(
+    this.loadLocalStorage(KEYS_LOCALSTORAGE.HISTORY_SEARCH)
+  );
+  keyHistorySearch = computed(() => Object.keys(this.historySearch()));
+
+  saveGifsToLocalStorage = effect(() => {
+    const parseString = JSON.stringify(this.historySearch());
+    localStorage.setItem(KEYS_LOCALSTORAGE.HISTORY_SEARCH, parseString);
+  });
 
   constructor() {
     this.loadGifs();
+  }
+
+  private loadLocalStorage(key: string) {
+    const historySearch = localStorage.getItem(key);
+
+    if (historySearch) {
+      return JSON.parse(historySearch);
+    }
+
+    return {};
   }
 
   loadGifs() {
