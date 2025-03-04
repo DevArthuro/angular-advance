@@ -1,3 +1,17 @@
-<div class="py-5">
+<!-- <div class="py-5">
     <app-list-images [gifs]="serviceGif.gifs()"/>
+</div> -->
+
+
+
+<div class="h-screen grid grid-cols-2 md:grid-cols-4 gap-4 pt-5 overflow-y-scroll" (scroll)="onScroll($event)" #parentSection>
+    @for (items of serviceGif.trendingGroup(); track items.length + $index) {
+        <div class="grid gap-4">
+            @for (gif of items; track gif.id) {
+                <div>
+                    <img class="h-auto max-w-full rounded-lg" [src]="gif.url" [alt]="gif.title">
+                </div>
+            }
+        </div>
+    }
 </div>
