@@ -1,0 +1,5 @@
+<section class="flex flex-row gap-2 mt-2">
+    <input type="text" class="input input-bordered mr-2 w-56" placeholder="Buscar por cápital" autofocus #txtSearch (keyup.enter)="onSearch(txtSearch.value)" [placeholder]="placeholder()">
+
+    <button class="btn btn-primary" (click)="onSearch(txtSearch.value)">Buscar</button>
+</section>
