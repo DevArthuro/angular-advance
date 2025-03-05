@@ -1,0 +1,12 @@
+<nav class="p-4 w-full">
+    <ul class="menu bg-base-200 sm:menu-horizontal rounded-box gap-2">
+        @for (itemMenu of menu; track itemMenu.id) {
+            <li >
+              <a class="btn btn-primary" routerLinkActive="btn-primary" [routerLink]="itemMenu.href">
+                <img [src]="itemMenu.icon" alt="">
+                {{ itemMenu.label }}
+              </a>
+            </li>
+        }
+    </ul>
+</nav>
