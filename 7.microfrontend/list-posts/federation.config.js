@@ -5,7 +5,7 @@ module.exports = withNativeFederation({
   name: 'list-posts',
 
   exposes: {
-    './list-posts-page': './src/app/pages/list-posts-page/list-posts-page.component.ts',
+    './list-page': './src/app/pages/list-posts-page/list-posts-page.component.ts',
   },
 
   shared: {

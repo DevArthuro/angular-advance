@@ -1,4 +1,5 @@
 {
-	"register-post": "http://localhost:4202/remoteEntry.json",
-	"list-posts": "http://localhost:4201/remoteEntry.json"
+  "register-posts": "http://localhost:4201/remoteEntry.json",
+  "list-posts": "http://localhost:4202/remoteEntry.json",
+  "post-detail": "http://localhost:4204/remoteEntry.json"
 }

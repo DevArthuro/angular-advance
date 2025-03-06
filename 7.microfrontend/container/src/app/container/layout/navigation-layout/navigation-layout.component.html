@@ -1,0 +1,10 @@
+<nav class="navbar">
+    <ul class="navbar__list">
+        @for (item of routes; track item.id) {
+            <li [routerLinkActive]="'active'" class="navbar__list--item">
+               <a [routerLink]="item.href">{{item.label}}</a> 
+            </li>
+        }
+    </ul>
+</nav>
+<router-outlet />

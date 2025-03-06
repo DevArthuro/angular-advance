@@ -1,1 +1,12 @@
-<p>list-posts-page works!</p>
+<p>Post publicados</p>
+<section class="posts">
+    <ul class="posts__list">
+        @for (item of postService.posts(); track item.id) {
+            <li class="post__list--item">
+                <h4>{{item.title}}</h4>
+                <p>{{item.description}}</p>
+                <a [routerLink]="`/posts/${item.id}`">Ver post</a>
+            </li>
+        }
+    </ul>
+</section>

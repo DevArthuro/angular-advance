@@ -1,3 +1,24 @@
 {
-  "posts": [{ "id": 1, "title": "Post new", "description": "description 1" }]
+  "posts": [
+    {
+      "id": "1",
+      "title": "Post new",
+      "description": "description 1"
+    },
+    {
+      "id": 2,
+      "title": "one title",
+      "description": "description"
+    },
+    {
+      "id": 57.661968417606026,
+      "title": "post",
+      "description": "un post mas"
+    },
+    {
+      "id": 58.7225903830235,
+      "title": "nuevo",
+      "description": "hola"
+    }
+  ]
 }

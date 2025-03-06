@@ -3,6 +3,6 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: "posts",
-        loadChildren: () => import("./posts/container.routes")
+        loadChildren: () => import("../app/container/container.routes")
     }
 ];
