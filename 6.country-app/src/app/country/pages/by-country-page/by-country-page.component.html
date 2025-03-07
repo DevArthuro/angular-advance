@@ -1,2 +1,6 @@
-<country-search-input (onSearchOutput)="onSearch($event)" placeholder="Buscar por país"/>
-<country-list-table />
+<country-search-input (onSearchOutput)="query.set($event)" placeholder="Buscar por país"/>
+@if (callServiceCountries.error()) {
+    <p>{{callServiceCountries.error()}}</p>
+} @else if (callServiceCountries.hasValue()) {
+    <country-list-table [countries]="callServiceCountries.value()" [isLoading]="callServiceCountries.isLoading()"/>
+}

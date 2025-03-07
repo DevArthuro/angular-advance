@@ -16,7 +16,7 @@ export default class ByCapitalPageComponent {
     request: () => ({ query: this.query() }),
     loader: async ({ request: { query } }) => {
       if (!query) return [];
-      return await firstValueFrom(this.countryService.getCapitalByQuery(query));
+      return await firstValueFrom(this.countryService.getCapitalsByQuery(query));
     },
   });
 }

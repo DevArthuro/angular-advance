@@ -12,7 +12,7 @@ const BASE_URL_API = 'https://restcountries.com/v3.1';
 export class CountryService {
   http = inject(HttpClient);
 
-  getCapitalByQuery(query: string) {
+  getCapitalsByQuery(query: string) {
     query = query.toLowerCase();
 
     return this.http
@@ -22,6 +22,21 @@ export class CountryService {
         catchError((error) => {
           return throwError(
             () => new Error('Has ocurrer error to get capitals...')
+          );
+        })
+      );
+  }
+
+  getCountriesByQuery(query: string) {
+    query = query.toLowerCase()
+
+    return this.http
+      .get<ResponseCountry[]>(`${BASE_URL_API}/name/${query}`)
+      .pipe(
+        map((value) => CountryMapper.parseResponseListToCountryList(value)),
+        catchError((error) => {
+          return throwError(
+            () => new Error('Has ocurrer error to get countries...')
           );
         })
       );
