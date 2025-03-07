@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { SearchInputComponent } from '../../components/search-input/search-input.component';
 import { TableComponent } from '../../components/table/tableList.component';
 import { CountryService } from '../../services/contriesRest.service';
-import { ResponseCountry } from '../../interfaces/country.interface';
+import { Country } from '../../interfaces/country.interface';
 @Component({
   selector: 'country-by-capital-page',
   imports: [SearchInputComponent, TableComponent],
@@ -10,7 +10,7 @@ import { ResponseCountry } from '../../interfaces/country.interface';
 })
 export default class ByCapitalPageComponent {
   countryService = inject(CountryService);
-  countries = signal<ResponseCountry[]>([]);
+  countries = signal<Country[]>([]);
   isLoading = signal<boolean>(false);
   isError = signal<string | null>(null);
 
@@ -25,6 +25,7 @@ export default class ByCapitalPageComponent {
       },
       error: (error) => {
         this.isError.set('Has ocurr the error');
+        this.isLoading.set(false);
       },
       complete: () => {
         this.isLoading.set(false);
