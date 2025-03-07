@@ -1,2 +1,2 @@
 <country-search-input (onSearchOutput)="onSearch($event)" placeholder="Buscar por cápital"/>
-<country-list-table />
+<country-list-table [isLoading]="isLoading()" [countries]="countries()"/>

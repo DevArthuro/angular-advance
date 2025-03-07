@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { ResponseCountry } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'country-list-table',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './tableList.component.html'
 })
 export class TableComponent {
-
+  isLoading = input.required<boolean>();
+  countries = input.required<ResponseCountry[]>()
 }
