@@ -1,3 +1,6 @@
-<country-search-input (onSearchOutput)="onSearch($event)" placeholder="Buscar por cápital"/>
-<country-list-table [isLoading]="isLoading()" [countries]="countries()"/>
-<p>{{isError()}}</p>
+<country-search-input (onSearchOutput)="query.set($event)" placeholder="Buscar por cápital"/>
+@if (callServiceCountries.error()) {
+    <p>{{callServiceCountries.error()}}</p>
+} @else if (callServiceCountries.hasValue()) {
+    <country-list-table [isLoading]="callServiceCountries.isLoading()" [countries]="callServiceCountries.value()"/>
+}
