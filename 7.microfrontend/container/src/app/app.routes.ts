@@ -4,5 +4,9 @@ export const routes: Routes = [
     {
         path: "posts",
         loadChildren: () => import("../app/container/container.routes")
+    },
+    {
+        path: "**",
+        redirectTo: "posts"
     }
 ];

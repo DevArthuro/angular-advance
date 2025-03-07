@@ -1,10 +1,18 @@
 <nav class="navbar">
     <ul class="navbar__list">
         @for (item of routes; track item.id) {
-            <li [routerLinkActive]="'active'" class="navbar__list--item">
-               <a [routerLink]="item.href">{{item.label}}</a> 
-            </li>
+            @if (item.hardPush) {
+                <li  class="navbar__list--item">
+                   <a [href]="`posts/${item.href}`" [routerLinkActive]="'active'">{{item.label}}</a> 
+                </li>
+            } @else {
+                <li  class="navbar__list--item">
+                   <a [routerLink]="item.href" [routerLinkActive]="'active'">{{item.label}}</a> 
+                </li>
+            }
         }
     </ul>
 </nav>
-<router-outlet />
+<section class="content">
+    <router-outlet />
+</section>

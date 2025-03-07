@@ -5,6 +5,7 @@ interface RouteSchema {
   id: number;
   label: string;
   href: string;
+  hardPush?: boolean;
 }
 
 @Component({
@@ -20,6 +21,7 @@ export default class NavigationLayoutComponent {
       href: 'list',
       id: 1,
       label: 'Ver posts',
+      hardPush: true,
     },
     {
       href: 'register',

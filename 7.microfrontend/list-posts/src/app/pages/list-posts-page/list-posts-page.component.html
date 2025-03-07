@@ -1,12 +1,14 @@
-<p>Post publicados</p>
+<p class="posts__title">Post publicados</p>
 <section class="posts">
-    <ul class="posts__list">
+    <div class="posts__grid">
         @for (item of postService.posts(); track item.id) {
-            <li class="post__list--item">
-                <h4>{{item.title}}</h4>
-                <p>{{item.description}}</p>
-                <a [routerLink]="`/posts/${item.id}`">Ver post</a>
-            </li>
+            <div class="posts__card">
+                <h4 class="posts__card-title">{{item.title}}</h4>
+                <p class="posts__card-description">{{item.description}}</p>
+                <button class="posts__card-button" [routerLink]="`/posts/${item.id}`">Ver más</button>
+            </div>
+        } @empty {
+            <p>No hay ningún post</p>
         }
-    </ul>
+    </div>
 </section>

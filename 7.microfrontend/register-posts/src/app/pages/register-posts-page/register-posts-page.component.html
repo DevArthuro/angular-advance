@@ -1,17 +1,17 @@
-<p>Registra un nuevo post</p>
+<h4 class="title">Registra un nuevo post</h4>
 <section class="form">
     <section class="form__input form__input--title">
         <label for="title">Titulo</label>
-        <input id="title" type="text" (input)="onChangeProperty(txtTitle.value, 'title')" placeholder="Escribe un titulo para el post" #txtTitle >
+        <input id="title" type="text" (input)="onChangeProperty(txtTitle.value, 'title')" placeholder="Escribe un titulo para el post" #txtTitle>
     </section>
     <section class="form__input form__input--description">
-        <label for="description">description</label>
+        <label for="description">Descripción</label>
         <textarea id="description" (input)="onChangeProperty(txtDescription.value, 'description')" placeholder="Escribe la descripción de tu post" #txtDescription></textarea>
     </section>
     <section class="form__button form__button--submit">
         <button (click)="onSubmit()">Crear Post</button>
     </section>
     @if (postServices.post()) {
-        <p>Creado exitosamente!</p>
+        <p>¡Creado exitosamente!</p>
     }
 </section>
