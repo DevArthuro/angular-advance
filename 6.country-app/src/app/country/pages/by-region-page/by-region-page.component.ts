@@ -3,7 +3,7 @@ import { TableComponent } from "../../components/table/tableList.component";
 
 @Component({
   selector: 'country-by-region-page',
-  imports: [TableComponent],
+  imports: [],
   templateUrl: './by-region-page.component.html',
 })
 export default class ByRegionPageComponent {

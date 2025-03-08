@@ -13,7 +13,11 @@
             </tr>
         </thead>
         @if (isLoading()) {
-            <p>Cargando</p>
+            <tbody>
+                <tr>
+                    <td colspan="8" class="text-center">Cargando...</td>
+                </tr>
+            </tbody>
         } @else {
             @for (country of countries(); track $index) {
                 <tbody>
@@ -34,6 +38,20 @@
                             <a class="link-secondary cursor-pointer" [routerLink]="['/country/by', `${country.cca2}`]" >Más información</a>
                         </td>
                     </tr>
+                </tbody>
+            } @empty {
+                <tbody>
+                @if (!isLoading() && !isError()) {
+                    <tr>
+                        <td colspan="8" class="text-center">Any country is found</td>
+                    </tr>
+                }
+                
+                @if (isError()) {
+                    <tr>
+                        <td colspan="8" class="text-center">{{isError()}}</td>
+                    </tr>
+                }
                 </tbody>
             }
         }
