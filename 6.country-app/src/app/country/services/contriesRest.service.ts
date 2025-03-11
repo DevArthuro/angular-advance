@@ -28,7 +28,7 @@ export class CountryService {
   }
 
   getCountriesByQuery(query: string) {
-    query = query.toLowerCase()
+    query = query.toLowerCase();
 
     return this.http
       .get<ResponseCountry[]>(`${BASE_URL_API}/name/${query}`)
@@ -37,6 +37,20 @@ export class CountryService {
         catchError((error) => {
           return throwError(
             () => new Error('Has ocurrer error to get countries...')
+          );
+        })
+      );
+  }
+
+  getCountyByQuery(code: string) {
+    return this.http
+      .get<ResponseCountry[]>(`${BASE_URL_API}/alpha/${code}`)
+      .pipe(
+        map((value) => CountryMapper.parseResponseListToCountryList(value)),
+        map((value) => value.at(0)!),
+        catchError((error) => {
+          return throwError(
+            () => new Error('Has ocurrer error to get country...')
           );
         })
       );
