@@ -1,0 +1,12 @@
+.content {
+    max-width: 1350px;
+    margin: auto;
+    min-height: 100vh;
+}
+
+.modal__post--create {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

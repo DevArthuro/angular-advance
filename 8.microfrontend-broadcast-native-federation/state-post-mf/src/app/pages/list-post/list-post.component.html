@@ -1,0 +1,9 @@
+<section class="posts">
+    @for (item of postService.posts(); track item.id) {
+        <div class="posts__detail">
+            <app-card-post [post]="item"/>
+        </div>
+    } @empty {
+        <p>There aren't elements</p>
+    }
+</section>
