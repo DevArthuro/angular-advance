@@ -4,10 +4,12 @@ import { map, of } from 'rxjs';
 import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { CountryService } from '../../services/contriesRest.service';
 import { Country } from '../../interfaces/country.interface';
+import { NotFoundComponent } from '../../../shared/components/not-found/not-found.component';
+import { CountryInformationComponent } from "./country-information/country-information.component";
 
 @Component({
   selector: 'country-by-id',
-  imports: [],
+  imports: [NotFoundComponent, CountryInformationComponent],
   templateUrl: './by-id-country.component.html'
 })
 export default class ByIdCountryComponent {
@@ -17,7 +19,7 @@ export default class ByIdCountryComponent {
   callCountryByCode = rxResource({
     request: () => ({id: this.id }),
     loader: () => {
-      return this.countryService.getCountyByQuery(this.id()!);
+      return this.countryService.getCountyByQuery(this.id);
     }
   })
 }

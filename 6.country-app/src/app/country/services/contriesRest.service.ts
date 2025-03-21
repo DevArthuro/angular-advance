@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ResponseCountry } from '../interfaces/res.interface';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, delay, map, throwError } from 'rxjs';
 import { CountryMapper } from '../mapper/country.mapper';
 
 const BASE_URL_API = 'https://restcountries.com/v3.1';
@@ -34,6 +34,7 @@ export class CountryService {
       .get<ResponseCountry[]>(`${BASE_URL_API}/name/${query}`)
       .pipe(
         map((value) => CountryMapper.parseResponseListToCountryList(value)),
+        delay(5000),
         catchError((error) => {
           return throwError(
             () => new Error('Has ocurrer error to get countries...')
