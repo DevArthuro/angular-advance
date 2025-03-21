@@ -6,4 +6,6 @@ export interface Country {
   capital: string;
   population: number;
   SPA_nameTraslate: string;
+  region: string;
+  subRegion: string;
 }
