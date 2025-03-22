@@ -21,6 +21,11 @@ const countryRoutes: Route[] = [
           import('./pages/by-region-page/by-region-page.component'),
       },
       {
+        path: 'by-region/:region',
+        loadComponent: () =>
+          import('./pages/by-region-page/by-region-page.component'),
+      },
+      {
         path: 'by/:id',
         loadComponent: () =>
           import('./pages/by-id-country/by-id-country.component'),

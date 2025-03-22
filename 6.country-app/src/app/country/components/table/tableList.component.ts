@@ -11,6 +11,6 @@ import { RouterLink } from '@angular/router';
 })
 export class TableComponent {
   isLoading = input.required<boolean>();
-  countries = input.required<Country[]>();
+  countries = input.required<Country[] | undefined>();
   isError = input.required<string |unknown>()
 }

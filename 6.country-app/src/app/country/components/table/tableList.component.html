@@ -19,41 +19,42 @@
                 </tr>
             </tbody>
         } @else {
-            @for (country of countries(); track $index) {
-                <tbody>
-                    <tr>
-                        <td>{{$index + 1}}</td>
-                        <td>{{ country.flag }}</td>
-                        <td>
-                            <img [src]="country.flagSvg" [alt]="country.name" class="w-10">
-                        </td>
-                        <td>{{country.SPA_nameTraslate}}</td>
-                        <td>{{country.name}}</td>
-                        <td>
-                            <span class="badge badge-secondary">
-                                {{country.population | number }}
-                            </span>
-                        </td>
-                        <td>
-                            <a class="link-secondary cursor-pointer" [routerLink]="['/country/by', `${country.cca2}`]" >Más información</a>
-                        </td>
-                    </tr>
-                </tbody>
-            } @empty {
-                <tbody>
-                @if (!isLoading() && !isError()) {
-                    <tr>
-                        <td colspan="8" class="text-center">Any country is found</td>
-                    </tr>
+            @if (countries()) {
+                @for (country of countries(); track $index) {
+                    <tbody>
+                        <tr>
+                            <td>{{$index + 1}}</td>
+                            <td>{{ country.flag }}</td>
+                            <td>
+                                <img [src]="country.flagSvg" [alt]="country.name" class="w-10">
+                            </td>
+                            <td>{{country.SPA_nameTraslate}}</td>
+                            <td>{{country.name}}</td>
+                            <td>
+                                <span class="badge badge-secondary">
+                                    {{country.population | number }}
+                                </span>
+                            </td>
+                            <td>
+                                <a class="link-secondary cursor-pointer" [routerLink]="['/country/by', `${country.cca2}`]" >Más información</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                } @empty {
+                    <tbody>
+                        <tr>
+                            <td colspan="8" class="text-center">Any country is found</td>
+                        </tr>
+                    </tbody>
                 }
-                
+            }
+            <tbody>    
                 @if (isError()) {
                     <tr>
                         <td colspan="8" class="text-center">{{isError()}}</td>
                     </tr>
                 }
-                </tbody>
-            }
+            </tbody>
         }
     </table>
 </section>

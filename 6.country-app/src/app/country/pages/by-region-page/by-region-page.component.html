@@ -1,2 +1,8 @@
-<!-- <country-list-table /> -->
- <p>Region page is works!</p>
+<section class="flex gap-4">
+    @for (region of regions; track region) {
+        <button [routerLink]="['/country/by-region', `${region}`]" class="btn btn-lg hover:btn-primary" routerLinkActive="btn-primary">{{region}}</button>
+    }
+</section>
+
+
+<country-list-table [countries]="callServiceCountryByRegion.value()" [isLoading]="callServiceCountryByRegion.isLoading()" [isError]="callServiceCountryByRegion.error()"/>
