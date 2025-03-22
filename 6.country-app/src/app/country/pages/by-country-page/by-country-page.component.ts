@@ -1,9 +1,10 @@
-import { Component, inject, resource, signal } from '@angular/core';
+import { Component, inject, linkedSignal, resource, signal } from '@angular/core';
 import { SearchInputComponent } from '../../components/search-input/search-input.component';
 import { TableComponent } from '../../components/table/tableList.component';
 import { CountryService } from '../../services/contriesRest.service';
-import { firstValueFrom, of } from 'rxjs';
+import { firstValueFrom, map, of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'country-by-country-page',
   imports: [SearchInputComponent, TableComponent],
@@ -11,7 +12,10 @@ import { rxResource } from '@angular/core/rxjs-interop';
 })
 export default class ByCountryPageComponent {
   countryService = inject(CountryService);
-  query = signal<string>('');
+
+  preQuery = inject(ActivatedRoute).snapshot.queryParamMap.get('country');
+  router = inject(Router);
+  query = linkedSignal<string>(() => this.preQuery ?? '');
 
   // It recive the promise
 
@@ -30,7 +34,12 @@ export default class ByCountryPageComponent {
     request: () => ({ query: this.query() }),
     loader: ({ request: { query } }) => {
       if (!query) return of([]);
-      return this.countryService.getCountriesByQuery(query)
+      this.router.navigate(['country/by-country'], {
+        queryParams: {
+          country: query,
+        },
+      });
+      return this.countryService.getCountriesByQuery(query);
     },
   });
 }
