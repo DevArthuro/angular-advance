@@ -69,3 +69,16 @@
       <div class="stat-desc">{{ customDate() }}</div>
      </div>
 </div>
+
+<div class="divider"></div>
+
+<div class="flex flex-row gap-2">
+  <h1 class="text-2xl font-bold">
+    Locale Actual: 
+    <span class="badge badge-secondary">{{ locale.getLocale() }}</span>
+  </h1>
+
+  <button class="btn btn-primary" (click)="locale.changeLocale(languages.fr)">Change to French</button>
+  <button class="btn btn-primary" (click)="locale.changeLocale(languages.en)">Change to English</button>
+  <button class="btn btn-primary" (click)="locale.changeLocale(languages.es)">Change to Spanish</button>
+</div>
