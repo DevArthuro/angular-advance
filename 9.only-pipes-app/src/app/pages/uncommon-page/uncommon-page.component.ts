@@ -1,6 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
-import { I18nPluralPipe, I18nSelectPipe, TitleCasePipe } from '@angular/common';
+import {
+  I18nPluralPipe,
+  I18nSelectPipe,
+  JsonPipe,
+  KeyValuePipe,
+  SlicePipe,
+  TitleCasePipe,
+  UpperCasePipe,
+} from '@angular/common';
 
 const cliente1 = {
   name: 'Fernando',
@@ -18,7 +26,16 @@ const cliente2 = {
 
 @Component({
   selector: 'app-uncommon-page',
-  imports: [CardComponent, I18nSelectPipe, I18nPluralPipe, TitleCasePipe],
+  imports: [
+    CardComponent,
+    I18nSelectPipe,
+    I18nPluralPipe,
+    TitleCasePipe,
+    SlicePipe,
+    JsonPipe,
+    UpperCasePipe,
+    KeyValuePipe
+  ],
   templateUrl: './uncommon-page.component.html',
 })
 export default class UncommonPageComponent {
@@ -61,6 +78,16 @@ export default class UncommonPageComponent {
     '=0': 'no tenemos clientes',
     '=1': 'tenemos un cliente',
     '=2': 'tenemos dos clientes',
-    other: 'tenemos # clientes'
-  })
+    other: 'tenemos # clientes',
+  });
+
+  noramlization = signal({
+    undefined: 'No tenemos clientes',
+  });
+
+  profile = {
+    name: "carlos",
+    age: 20,
+    bornDate: new Date("02/08/2004").toISOString()
+  }
 }

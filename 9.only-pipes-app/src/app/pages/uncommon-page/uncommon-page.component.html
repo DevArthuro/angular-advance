@@ -9,9 +9,43 @@
         <button class="btn btn-primary" (click)="changeClient()">Click me</button>
     </card>
 
-    <card title="i18nSelectPipe">
+    <card title="i18nPluralPipe">
         <p>{{ clients().length | i18nPlural: clientsMap() | titlecase }} esperando por entrar</p>
         <button class="btn btn-primary" (click)="deleteClient()">delete</button>
+    </card>
+
+    <card title="SlicePipe">
+        <h1 class="text-2xl">Slice : 0 : n</h1>
+        <p class="text-primary">{{ clients().join(", ") }} </p>
+        <br>
+        <p class="text-primary break-words">3:n {{ clients() | slice : 3  }} </p>
+        <br>
+        <p class="text-primary break-words">0:9 {{ clients() | slice : 0 : 9 }} </p>
+        <br>
+        <p class="text-primary break-words">2:-3 {{ clients() | slice : 2 : -3  }} </p>
+        <br>
+        <p class="text-primary break-words">1:-1 {{ clients() | slice : 1 : -1 }} </p>
+    </card>
+
+    <card title="JsonPipe">
+        <pre class="text-primary">{{ clients() | json}}</pre>
+        <pre class="text-primary">{{ client() | json }}</pre>
+        <p class="text-primary">{{ clients().join(", ") | json | uppercase }}</p>
+    </card>
+
+    <card title="KeyValuePipe">
+        <h1>Representación key value</h1>
+        <pre class="text-primary">{{ profile | keyvalue | json}}</pre>
+
+        <h1>Uso en un for</h1>
+        <ul>
+            @for (item of profile | keyvalue; track item.key) {
+                <li>
+                    <h4 class="text-primary inline">{{item.key}}: </h4>
+                    <p class="inline">{{item.value}}</p>
+                </li>
+            }
+        </ul>
     </card>
 </div>
 
