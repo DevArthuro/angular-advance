@@ -8,4 +8,10 @@
         <p>Saludos {{ client().name }}, es un placer {{ client().gender | i18nSelect: invitationMap }} a nuestro evento</p>
         <button class="btn btn-primary" (click)="changeClient()">Click me</button>
     </card>
+
+    <card title="i18nSelectPipe">
+        <p>{{ clients().length | i18nPlural: clientsMap() | titlecase }} esperando por entrar</p>
+        <button class="btn btn-primary" (click)="deleteClient()">delete</button>
+    </card>
 </div>
+
