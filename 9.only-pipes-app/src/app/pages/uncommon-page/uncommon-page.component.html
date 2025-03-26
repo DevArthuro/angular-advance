@@ -47,5 +47,31 @@
             }
         </ul>
     </card>
+
+    <card title="AsyncPipe">
+        <h1 class="text-2xl">Esto es una promesa en proceso aprobada</h1>
+        @if(promiseValue | async; as value) {
+            <p class="text-primary">{{value}}</p>
+        } @else { 
+            <p class="text-amber-300">Esperando respuesta...</p>
+        }
+
+        <br>
+        <h1 class="text-2xl">Esto es una promesa en proceso rechazada</h1>
+        @if(promiseValueRejected | async; as value) {
+            <p class="text-primary">{{value}}</p>
+        } @else { 
+            <p class="text-amber-300">Esperando respuesta...</p>
+        }
+
+        <br>
+        <h1 class="text-2xl">Ahora con observables</h1>
+        @if(myObservable | async; as value) {
+            <p class="text-primary">{{value}}</p>
+        } @else { 
+            <p class="text-amber-300">Esperando respuesta...</p>
+        }
+        
+    </card>
 </div>
 

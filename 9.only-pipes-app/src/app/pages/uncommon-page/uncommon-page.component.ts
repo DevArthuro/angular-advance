@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
 import {
+  AsyncPipe,
   I18nPluralPipe,
   I18nSelectPipe,
   JsonPipe,
@@ -9,6 +10,7 @@ import {
   TitleCasePipe,
   UpperCasePipe,
 } from '@angular/common';
+import { interval, map, tap } from 'rxjs';
 
 const cliente1 = {
   name: 'Fernando',
@@ -34,7 +36,8 @@ const cliente2 = {
     SlicePipe,
     JsonPipe,
     UpperCasePipe,
-    KeyValuePipe
+    KeyValuePipe,
+    AsyncPipe,
   ],
   templateUrl: './uncommon-page.component.html',
 })
@@ -86,8 +89,27 @@ export default class UncommonPageComponent {
   });
 
   profile = {
-    name: "carlos",
+    name: 'carlos',
     age: 20,
-    bornDate: new Date("02/08/2004").toISOString()
-  }
+    bornDate: new Date('02/08/2004').toISOString(),
+  };
+
+  promiseValue: Promise<string> = new Promise((resolver, rejected) => {
+    setTimeout(() => {
+      resolver('Tenemos está promesa');
+    }, 3000);
+  });
+
+  promiseValueRejected: Promise<string> = new Promise((resolver, rejected) => {
+    setTimeout(() => {
+      rejected('Tenemos está promesa');
+    }, 3000);
+  });
+
+  myObservable = interval(2000).pipe(
+    map((value) => value +1),
+    tap((value) => {
+      console.log(`tap: ${value}`);
+    })
+  );
 }
