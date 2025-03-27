@@ -50,7 +50,15 @@
         <tr>
             <td>{{ i }}</td>
             <td>{{ item.name }}</td>
-            <td>{{ item.canFly }}</td>
+            <td>
+                <span
+                    class="text-xs w-44"
+                    [class.text-success]="item.canFly"
+                    [class.text-accent]="!item.canFly"
+                >
+                    {{ item.canFly | booleanToText: "puede volar" : "no puede volar" | titlecase }}
+                </span>
+            </td>
             <td>{{ item.color }}</td>
             <td>{{ item.creator }}</td>
         </tr>
