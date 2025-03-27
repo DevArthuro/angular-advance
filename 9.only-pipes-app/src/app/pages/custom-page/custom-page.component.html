@@ -59,8 +59,21 @@
                     {{ item.canFly | booleanToText: "puede volar" : "no puede volar" | titlecase }}
                 </span>
             </td>
-            <td>{{ item.color }}</td>
-            <td>{{ item.creator }}</td>
+            <td>
+                <span
+                    [style.color]="item.color | colorConvert: true"
+                >
+                    {{ item.color | colorConvert | titlecase }}
+                </span>
+            </td>
+            <td>
+                <span
+                    [class.text-primary]="(item.creator | creatorCase | lowercase) === 'dc'"
+                    [class.text-accent]="(item.creator | creatorCase | lowercase) === 'marvel'"
+                >
+                    {{ item.creator | creatorCase | titlecase }}
+                </span>
+            </td>
         </tr>
       }
     </tbody>
