@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './register-page.component.html',
 })
-export class RegisterPageComponent { }
+export default class RegisterPageComponent { }

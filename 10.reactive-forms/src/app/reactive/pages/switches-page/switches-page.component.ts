@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './switches-page.component.html',
 })
-export class SwitchesPageComponent { }
+export default class SwitchesPageComponent { }

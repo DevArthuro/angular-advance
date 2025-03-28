@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './dynamic-page.component.html',
 })
-export class DynamicPageComponent { }
+export default class DynamicPageComponent { }

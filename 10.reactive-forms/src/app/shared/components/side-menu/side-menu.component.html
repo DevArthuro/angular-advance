@@ -1,1 +1,54 @@
-<p>side-menu works!</p>
+<nav class="flex flex-col gap-[3rem]">
+    <section class="flex flex-col gap-[2rem]">
+        <h3 class="text-2xl font-extrabold">Rutas Autorizadas</h3>
+        <ul>
+            @for (route of authRoutes; track route.path) {
+                <li class="w-[150px] btn btn-primary">
+                    <a [href]="route.path" class="w-full h-full flex justify-center items-center">
+                        {{ route.title }}
+                    </a>
+                </li>
+            }
+        </ul>
+    </section>
+
+    <section class="flex flex-col gap-[2rem]">
+        <h3 class="text-2xl font-extrabold">Rutas Paises</h3>
+        <ul>
+            @for (route of countryRoutes; track route.path) {
+                <li class="w-[150px] btn btn-primary">
+                    <a [href]="route.path" class="w-full h-full flex justify-center items-center">
+                        {{ route.title }}
+                    </a>
+                </li>
+            }
+        </ul>
+    </section>
+
+    <section class="flex flex-col gap-[2rem]">
+        <h3 class="text-2xl font-extrabold">Rutas Reactivas</h3>
+        <ul class="flex flex-col gap-[2rem]">
+            @for (route of reactiveRoutes; track route.path) {
+                @if (route?.children) {
+                    <ul class="flex flex-col gap-[2rem]">
+                        @for (routeChild of route.children; track routeChild.path) {
+                            @if (!routeChild.path.includes("**")) {
+                                <li class="w-[150px] btn btn-primary">
+                                    <a [href]="routeChild.path" class="w-full h-full flex justify-center items-center">
+                                        {{ routeChild.title }}
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                } @else {
+                    <li class="w-[150px] btn btn-secondary">
+                        <a [href]="route.path" class="w-full h-full">
+                            {{ route.title }}
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </section>
+</nav>
