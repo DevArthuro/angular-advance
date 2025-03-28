@@ -1,3 +1,16 @@
-<app-side-menu />
+<section class="mx-5">
+    <h1 class="text-2xl font-bold">Formularios ejercicios</h1>
+    <h1 class="text-xl font-thin">Formularios de diferentes tipos</h1>
+</section>
 
-<router-outlet />
+<main class="grid grid-cols-[1fr_auto] gap-4 p-4">
+
+  <section class="flex-grow w-full">
+    <router-outlet></router-outlet>
+  </section>
+
+
+  <section class="shadow-md w-[350px] flex justify-center items-center p-[30px_10px] h-full">
+    <app-side-menu></app-side-menu>
+  </section>
+</main>
