@@ -1,1 +1,48 @@
-<p>country-page works!</p>
+<h1 class="mt-3 text-3xl font-bold">Selectores anidados</h1>
+<hr class="my-4" />
+
+<form class="space-y-4">
+  <!-- Region -->
+  <div class="mb-3">
+    <label class="block text-sm font-medium">Continente:</label>
+    <select formControlName="region" class="form-control border border-gray-300 rounded p-2">
+      <option value="">-- Seleccione Continente --</option>
+      
+      <!-- <option [value]="region">
+        {{ region }}
+      </option> -->
+      
+    </select>
+  </div>
+
+  <!-- Countries -->
+  <div class="mb-3">
+    <label class="block text-sm font-medium">País:</label>
+    <select formControlName="country" class="form-control border border-gray-300 rounded p-2">
+      <option value="">-- Seleccione País --</option>
+
+      <!-- <option [value]="country.cca3">
+        {{ country.name }}
+      </option> -->
+
+    </select>
+  </div>
+
+  <!-- Borders -->
+  <div class="mb-3">
+    <label class="block text-sm font-medium">Fronteras:</label>
+    <select formControlName="border" class="form-control border border-gray-300 rounded p-2">
+      <option value="">-- Seleccione la frontera --</option>
+
+      <!-- <option [value]="country.cca3">
+        {{ country.name }}
+      </option> -->
+    </select>
+  </div>
+</form>
+
+<h3 class="mt-4 text-xl font-semibold">Formulario</h3>
+<code class="block bg-gray-100 p-2 rounded">
+  <!-- {{ 'myForm.value' | json }} -->
+</code>
+<p class="mt-2">is form valid: {{ 'myForm.valid' }}</p>
