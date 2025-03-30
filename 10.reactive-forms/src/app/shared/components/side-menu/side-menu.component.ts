@@ -3,10 +3,11 @@ import authRoutes from '../../../auth/auth.routes';
 import reactiveRoutes from '../../../reactive/reactive.routes';
 import countryRoutes from '../../../country/country.routes';
 import { JsonPipe } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-side-menu',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './side-menu.component.html',
 })
 export class SideMenuComponent {
