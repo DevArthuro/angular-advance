@@ -2,14 +2,15 @@
 <hr class="mb-4">
 
 <div class="flex flex-col space-y-4">
-    <form autocomplete="off" class="space-y-4">
+    <form autocomplete="off" class="space-y-4" [formGroup]="formProduct">
 
         <!-- Campo de producto -->
         <div class="flex flex-col space-y-2">
             <label class="text-sm font-medium">Producto</label>
             <input type="text"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Nombre del producto">
+                   placeholder="Nombre del producto"
+                   formControlName="name">
             <span class="text-red-500 text-sm">
                 <!-- Debe de ser de 3 letras -->
                 error message
@@ -21,7 +22,8 @@
             <label class="text-sm font-medium">Precio</label>
             <input type="number"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Precio del producto">
+                   placeholder="Precio del producto" 
+                   formControlName="price">
             <span class="text-red-500 text-sm">
                 El precio debe de ser 0 o mayor
             </span>
@@ -32,7 +34,8 @@
             <label class="text-sm font-medium">Existencias</label>
             <input type="number"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Existencias del producto">
+                   placeholder="Existencias del producto"
+                   formControlName="isStorage">
             <span class="text-red-500 text-sm">
                 Las existencias deben de ser 0 o mayor
             </span>
@@ -50,20 +53,20 @@
 
 <div class="flex flex-col space-y-2 mt-4 text-black">
     <span class="text-white">Valid</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'objeto' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.valid | json }}</pre>
 
     <span class="text-white">Pristine</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'objeto' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.pristine | json }}</pre>
 
     <span class="text-white">Touched</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'objeto' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.touched | json }}</pre>
 
     <span class="text-white">Value</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'objeto' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.value | json }}</pre>
 
     <span class="text-white">Precio</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'objeto' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.controls.price.value | json }}</pre>
 
     <span class="text-white">Producto</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'objeto' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.controls.name.value | json }}</pre>
 </div>
