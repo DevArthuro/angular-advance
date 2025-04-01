@@ -2,7 +2,7 @@
 <hr class="mb-4">
 
 <div class="flex flex-col space-y-4">
-    <form autocomplete="off" class="space-y-4" [formGroup]="formProduct">
+    <form autocomplete="off" class="space-y-4" [formGroup]="formProduct" (ngSubmit)="onSave()">
 
         <!-- Campo de producto -->
         <div class="flex flex-col space-y-2">
@@ -11,9 +11,9 @@
                    class="border border-gray-300 rounded p-2"
                    placeholder="Nombre del producto"
                    formControlName="name">
-            @if (isErrorField("name")) {
+            @if (formUtil.isErrorField(formProduct, "name")) {
                 <span class="text-red-500 text-sm">
-                    {{ getMessageError("name") }}
+                    {{ formUtil.getMessageError(formProduct, "name") }}
                 </span>
             }
         </div>
@@ -25,9 +25,9 @@
                    class="border border-gray-300 rounded p-2"
                    placeholder="Precio del producto" 
                    formControlName="price">
-            @if (isErrorField("price")) {
+            @if (formUtil.isErrorField(formProduct, "price")) {
                 <span class="text-red-500 text-sm">
-                    {{ getMessageError("price") }}
+                    {{ formUtil.getMessageError(formProduct, "price") }}
                 </span>
             }
         </div>
@@ -39,9 +39,9 @@
                    class="border border-gray-300 rounded p-2"
                    placeholder="Existencias del producto"
                    formControlName="isStorage">
-            @if (isErrorField("isStorage")) {
+            @if (formUtil.isErrorField(formProduct, "isStorage")) {
                 <span class="text-red-500 text-sm">
-                    {{ getMessageError("isStorage") }}
+                    {{ formUtil.getMessageError(formProduct, 'isStorage') }}
                 </span>
             }
         </div>

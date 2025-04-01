@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } from "@angular/forms"
+import { FormUtils } from '../../../utils/form-utils';
 
 @Component({
   selector: 'app-basic-page',
@@ -9,6 +10,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } 
 })
 export default class BasicPageComponent {
   private fb = inject(FormBuilder);
+  formUtil = FormUtils
 
   // formProduct = new FormGroup({
   //   name: new FormControl(''),
@@ -23,26 +25,48 @@ export default class BasicPageComponent {
   });
 
 
-  isErrorField(field: string) {
-    return !!this.formProduct.controls[field].errors
-  }
+  // isErrorField(field: string) {
+  //   return (
+  //     !!this.formProduct.controls[field].errors &&
+  //     this.formProduct.controls[field].touched
+  //   );
+  // }
 
-  getMessageError(field: string) {
-    if (!this.formProduct.controls[field]) return null;
+  // getMessageError(field: string) {
+  //   if (!this.formProduct.controls[field]) return null;
 
-    const errors = this.formProduct.controls[field].errors?? {}
+  //   const errors = this.formProduct.controls[field].errors?? {}
 
-    for (const key in errors) {
-      switch(key) {
-        case 'required':
-          return 'El campo es requerido';
-        case 'minlength':
-          return `Mìnimo de ${errors['minlength'].requiredLength} caracteres`;
-        case 'min':
-          return `Valor mìnimo de ${errors["min"].min}`;
-      }
+  //   for (const key in errors) {
+  //     switch(key) {
+  //       case 'required':
+  //         return 'El campo es requerido';
+  //       case 'minlength':
+  //         return `Mìnimo de ${errors['minlength'].requiredLength} caracteres`;
+  //       case 'min':
+  //         return `Valor mìnimo de ${errors["min"].min}`;
+  //     }
+  //   }
+
+  //   return null
+  // }
+
+
+  onSave() {
+    if (this.formProduct.invalid) {
+      this.formProduct.markAllAsTouched()
+      return null
     }
 
+    console.log(this.formProduct.value)
+
+    this.formProduct.reset({
+      name: "xxx",
+      price: 1000,
+      isStorage: 0
+    })
+
     return null
+
   }
 }
