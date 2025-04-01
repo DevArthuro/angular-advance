@@ -11,10 +11,11 @@
                    class="border border-gray-300 rounded p-2"
                    placeholder="Nombre del producto"
                    formControlName="name">
-            <span class="text-red-500 text-sm">
-                <!-- Debe de ser de 3 letras -->
-                error message
-            </span>
+            @if (isErrorField("name")) {
+                <span class="text-red-500 text-sm">
+                    {{ getMessageError("name") }}
+                </span>
+            }
         </div>
 
         <!-- Campo de precio -->
@@ -24,9 +25,11 @@
                    class="border border-gray-300 rounded p-2"
                    placeholder="Precio del producto" 
                    formControlName="price">
-            <span class="text-red-500 text-sm">
-                El precio debe de ser 0 o mayor
-            </span>
+            @if (isErrorField("price")) {
+                <span class="text-red-500 text-sm">
+                    {{ getMessageError("price") }}
+                </span>
+            }
         </div>
 
         <!-- Campo de existencias -->
@@ -36,9 +39,11 @@
                    class="border border-gray-300 rounded p-2"
                    placeholder="Existencias del producto"
                    formControlName="isStorage">
-            <span class="text-red-500 text-sm">
-                Las existencias deben de ser 0 o mayor
-            </span>
+            @if (isErrorField("isStorage")) {
+                <span class="text-red-500 text-sm">
+                    {{ getMessageError("isStorage") }}
+                </span>
+            }
         </div>
 
         <div class="flex justify-end">
@@ -64,9 +69,15 @@
     <span class="text-white">Value</span>
     <pre class="bg-gray-100 p-2 rounded">{{ formProduct.value | json }}</pre>
 
+    <span class="text-white">error fields</span>
+    <pre class="bg-gray-100 p-2 rounded">Name {{ formProduct.controls["name"].errors | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">Price {{ formProduct.controls["price"].errors | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">isStorage {{ formProduct.controls["isStorage"].errors | json }}</pre>
+
+
     <span class="text-white">Precio</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.controls.price.value | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.controls["price"].value | json }}</pre>
 
     <span class="text-white">Producto</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.controls.name.value | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formProduct.controls["name"].value | json }}</pre>
 </div>
