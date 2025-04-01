@@ -32,13 +32,12 @@
                 @if (route?.children) {
                     <ul class="flex flex-col gap-[2rem]">
                         @for (routeChild of route.children; track routeChild.path) {
-                            @if (!routeChild.path.includes("**")) {
-                                <li routerLinkActive="btn-primary" class="w-[150px] btn">
-                                    <a [routerLink]="routeChild.path" class="w-full h-full flex justify-center items-center">
-                                        {{ routeChild.title }}
-                                    </a>
-                                </li>
-                            }
+                            <li routerLinkActive="btn-primary" class="w-[150px] btn">
+                                <a [routerLink]="routeChild.path" class="w-full h-full flex justify-center items-center">
+                                    {{ routeChild.title }}
+                                </a>
+                            </li>
+
                         }
                     </ul>
                 } @else {

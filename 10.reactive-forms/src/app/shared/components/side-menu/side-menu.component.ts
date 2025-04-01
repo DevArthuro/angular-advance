@@ -19,10 +19,12 @@ export class SideMenuComponent {
   reactiveRoutes = reactiveRoutes.map((route) => ({
     title: route.title,
     path: `reactive/${route.path}`,
-    children: route.children?.map((routeChild) => ({
-      title: routeChild.title,
-      path: `reactive/${routeChild.path}`,
-    })),
+    children: route.children
+      ?.filter((routeFilter) => routeFilter.path !== '**')
+      .map((routeChild) => ({
+        title: routeChild.title,
+        path: `reactive/${routeChild.path}`,
+      })),
   }));
 
   countryRoutes = countryRoutes.map((route) => ({
