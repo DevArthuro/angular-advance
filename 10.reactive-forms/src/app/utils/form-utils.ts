@@ -26,7 +26,7 @@ export class FormUtils {
     );
   }
 
-  private static dynamicMessageSwitch(errors: ValidationErrors) {
+  static dynamicMessageSwitch(errors: ValidationErrors) {
     for (const key in errors) {
       switch (key) {
         case 'required':

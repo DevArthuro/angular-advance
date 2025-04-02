@@ -22,9 +22,9 @@
         <div class="flex space-x-2">
             <input class="border border-gray-300 rounded p-2 flex-grow"
                    placeholder="Agregar favorito"
-                   formControlName="nameGame">
+                   [formControl]="nameGame" (keydown.enter)="onSaveGameInFavorities()">
             <button class="btn btn-outline-primary bg-blue-500 text-white rounded p-2"
-                    type="button">
+                    type="button" (click)="onSaveGameInFavorities()">
                 Agregar favorito
             </button>
         </div>
@@ -38,7 +38,7 @@
                 <div class="flex space-x-2">
                     <input class="border border-gray-300 rounded p-2 flex-grow" [formControlName]="index">
                     <button class="btn btn-outline-danger bg-red-500 text-white rounded p-2"
-                            type="button">
+                            type="button" (click)="onDeleteFavorities(index)">
                       Eliminar
                   </button>
                 </div>
@@ -47,14 +47,19 @@
                        {{ formUtil.getMessageErrorArrayField(getFavorities, index) }}
                     </span>
                 }
-            }
+            } 
+
         </div>
+        @if (getFavorities.invalid) {
+            <span class="text-red-500 text-sm">
+                {{ formUtil.dynamicMessageSwitch(getFavorities.errors!) }}
+            </span>
+        }
     </div>
 
     <div class="flex justify-end">
         <button type="submit"
-                class="bg-blue-500 text-white rounded p-2">
-                <!-- [disabled]="myForm.invalid" -->
+                class="bg-blue-500 text-white rounded p-2 op cursor-pointer" [class.opacity-80]="formGames.invalid" [disabled]="formGames.invalid">
             Guardar
         </button>
     </div>
@@ -69,7 +74,8 @@
     <pre class="bg-gray-100 p-2 rounded">{{ formGames.value | json }}</pre>
     <br>
 
-    <span class="block text-sm font-medium text-white">Agregar Juego</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'object' | json }}</pre>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'object' | json }}</pre>
+    <span class="block text-sm font-medium text-white">Value</span>
+    <pre class="bg-gray-100 p-2 rounded">{{ getFavorities.errors | json }}</pre>
+    <br>
+
 </div>
