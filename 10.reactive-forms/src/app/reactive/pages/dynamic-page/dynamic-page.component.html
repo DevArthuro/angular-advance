@@ -1,16 +1,19 @@
 <h2 class="text-2xl font-bold mb-4">Reactivos: <small class="text-base font-normal">Dinámicos</small></h2>
 <hr class="mb-4">
 
-<form autocomplete="off" class="space-y-4">
+<form autocomplete="off" class="space-y-4" [formGroup]="formGames">
 
     <!-- Nombre -->
     <div class="flex flex-col space-y-2">
         <label class="text-sm font-medium">Nombre</label>
         <input class="border border-gray-300 rounded p-2"
-               placeholder="Nombre de la persona">
-        <span class="text-red-500 text-sm">
-               error message
-        </span>
+               placeholder="Nombre de la persona"
+               formControlName="name">
+        @if (formUtil.isErrorField(formGames, "name")) {
+            <span class="text-red-500 text-sm">
+                  {{ formUtil.getMessageError(formGames, "name") }}
+            </span>
+        }
     </div>
 
     <!-- Agregar Favorito -->
@@ -18,7 +21,8 @@
         <label class="text-sm font-medium">Agregar</label>
         <div class="flex space-x-2">
             <input class="border border-gray-300 rounded p-2 flex-grow"
-                   placeholder="Agregar favorito">
+                   placeholder="Agregar favorito"
+                   formControlName="nameGame">
             <button class="btn btn-outline-primary bg-blue-500 text-white rounded p-2"
                     type="button">
                 Agregar favorito
@@ -29,17 +33,21 @@
     <!-- Lista de Juegos Favoritos -->
     <div class="flex flex-col space-y-2">
         <label class="text-sm font-medium">Favoritos</label>
-        <div class="space-y-2">
-            <div class="flex space-x-2">
-                <input class="border border-gray-300 rounded p-2 flex-grow">
-                <button class="btn btn-outline-danger bg-red-500 text-white rounded p-2"
-                        type="button">
-                  Eliminar
-              </button>
-            </div>
-            <span class="text-red-500 text-sm">
-               Este campo es requerido
-            </span>
+        <div class="space-y-2"  formArrayName="favorites">
+            @for (item of getFavorities.controls; track $index; let index = $index) {
+                <div class="flex space-x-2">
+                    <input class="border border-gray-300 rounded p-2 flex-grow" [formControlName]="index">
+                    <button class="btn btn-outline-danger bg-red-500 text-white rounded p-2"
+                            type="button">
+                      Eliminar
+                  </button>
+                </div>
+                @if (formUtil.isValidArrayField(getFavorities, index)) {
+                    <span class="text-red-500 text-sm space-y-2">
+                       {{ formUtil.getMessageErrorArrayField(getFavorities, index) }}
+                    </span>
+                }
+            }
         </div>
     </div>
 
@@ -50,16 +58,15 @@
             Guardar
         </button>
     </div>
-
 </form>
 
 <div class="mt-4 text-black">
     <span class="block text-sm font-medium text-white">Valid</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'object' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formGames.valid| json }}</pre>
     <br>
 
     <span class="block text-sm font-medium text-white">Value</span>
-    <pre class="bg-gray-100 p-2 rounded">{{ 'object' | json }}</pre>
+    <pre class="bg-gray-100 p-2 rounded">{{ formGames.value | json }}</pre>
     <br>
 
     <span class="block text-sm font-medium text-white">Agregar Juego</span>

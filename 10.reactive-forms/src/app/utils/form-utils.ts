@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 export class FormUtils {
   static isErrorField(form: FormGroup, field: string) {
     return !!form.controls[field].errors && form.controls[field].touched;
@@ -9,6 +9,24 @@ export class FormUtils {
 
     const errors = form.controls[field].errors ?? {};
 
+    return FormUtils.dynamicMessageSwitch(errors);
+  }
+  
+  static getMessageErrorArrayField(formArray: FormArray, index: number) {
+    if (!formArray.controls[index]) return null;
+
+    const errors = formArray.controls[index].errors ?? {};
+
+    return FormUtils.dynamicMessageSwitch(errors);
+  }
+
+  static isValidArrayField(formArray: FormArray, index: number) {
+    return (
+      formArray.controls[index].errors && formArray.controls[index].touched
+    );
+  }
+
+  private static dynamicMessageSwitch(errors: ValidationErrors) {
     for (const key in errors) {
       switch (key) {
         case 'required':
@@ -22,4 +40,6 @@ export class FormUtils {
 
     return null;
   }
+
+
 }
