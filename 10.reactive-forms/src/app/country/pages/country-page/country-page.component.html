@@ -1,29 +1,31 @@
 <h1 class="mt-3 text-3xl font-bold">Selectores anidados</h1>
 <hr class="my-4" />
 
-<form class="space-y-4">
+<form class="space-y-4" [formGroup]="formCountry">
   <!-- Region -->
   <div class="mb-3">
     <label class="block text-sm font-medium">Continente:</label>
-    <select formControlName="region" class="w-full form-control border border-gray-300 rounded p-2">
+    <select formControlName="region" class="w-full form-control border border-gray-300 rounded p-2" formControlName="region">
       <option value="">-- Seleccione Continente --</option>
-      
-      <!-- <option [value]="region">
-        {{ region }}
-      </option> -->
-      
+      @for (region of regions(); track region) {
+        <option [value]="region" class="text-black">
+          {{ region }}
+        </option>
+      }
     </select>
   </div>
 
   <!-- Countries -->
   <div class="mb-3">
     <label class="block text-sm font-medium">País:</label>
-    <select formControlName="country" class="w-full form-control border border-gray-300 rounded p-2">
+    <select formControlName="country" class="w-full form-control border border-gray-300 rounded p-2" formControlName="country">
       <option value="">-- Seleccione País --</option>
 
-      <!-- <option [value]="country.cca3">
-        {{ country.name }}
-      </option> -->
+       @for (country of countries(); track country.cca3) {
+        <option [value]="country.cca3" class="text-black">
+          {{ country.name.common }}
+        </option>
+      }
 
     </select>
   </div>
@@ -34,15 +36,17 @@
     <select formControlName="border" class="w-full form-control border border-gray-300 rounded p-2">
       <option value="">-- Seleccione la frontera --</option>
 
-      <!-- <option [value]="country.cca3">
-        {{ country.name }}
-      </option> -->
+       @for (border of borders(); track border.cca3) {
+        <option [value]="border.cca3" class="text-black">
+          {{ border.name.common }}
+        </option>
+      }
     </select>
   </div>
 </form>
 
 <h3 class="mt-4 text-xl font-semibold">Formulario</h3>
-<code class="block bg-gray-100 p-2 rounded">
-  <!-- {{ 'myForm.value' | json }} -->
+<code class="block bg-gray-100 p-2 rounded text-black">
+ {{ formCountry.value | json }}
 </code>
-<p class="mt-2">is form valid: {{ 'myForm.valid' }}</p>
+<p class="mt-2 ">is form valid: {{ formCountry.valid }}</p>

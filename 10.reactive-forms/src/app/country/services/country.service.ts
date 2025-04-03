@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { Country } from '../interfaces/country.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -27,7 +27,15 @@ export class CountryService {
     return this.http.get<Country>(url);
   }
 
-  getBorderCountriesByCodes(borders: string[]) {
-    //TODO: 
+  getBorderCountriesByCodes(borders: string[]): Observable<Country[]> {
+    if (borders.length === 0) return of([])
+    
+    const countries: Observable<Country>[] = [];
+    borders.forEach((code) => {
+        const country = this.getCountryByAlphaCode(code)
+        countries.push(country)
+    })
+
+    return combineLatest(countries)
   }
 }
