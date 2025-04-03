@@ -1,5 +1,14 @@
-import { FormArray, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+} from '@angular/forms';
 export class FormUtils {
+  static namePattern = '^([a-zA-Z]+) ([a-zA-Z]+)$';
+  static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
+
   static isErrorField(form: FormGroup, field: string) {
     return !!form.controls[field].errors && form.controls[field].touched;
   }
@@ -11,7 +20,7 @@ export class FormUtils {
 
     return FormUtils.dynamicMessageSwitch(errors);
   }
-  
+
   static getMessageErrorArrayField(formArray: FormArray, index: number) {
     if (!formArray.controls[index]) return null;
 
@@ -35,11 +44,18 @@ export class FormUtils {
           return `Mìnimo de ${errors['minlength'].requiredLength} caracteres`;
         case 'min':
           return `Valor mìnimo de ${errors['min'].min}`;
+        case 'pattern':
+          const errorPattern = errors['pattern'].requiredPattern;
+          if (errorPattern === FormUtils.emailPattern) {
+            return 'El email no tiene el formato adecuado'
+          } else if (errorPattern === FormUtils.namePattern) {
+            return 'El campo debe contener un espacio'
+          } else if (errorPattern === FormUtils.notOnlySpacesPattern) {
+            return 'El campo no debe contener espacios'
+          }
       }
     }
 
     return null;
   }
-
-
 }

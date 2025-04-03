@@ -2,17 +2,19 @@
 <hr class="mb-4">
 
 <div class="flex flex-col space-y-4">
-    <form autocomplete="off" class="space-y-4">
+    <form autocomplete="off" class="space-y-4" [formGroup]="myFormRegister" (submit)="onSaven()">
 
         <!-- Nombre -->
         <div class="flex flex-col space-y-2">
             <label class="text-sm font-medium">Nombre y apellido</label>
             <input type="text"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Nombre del usuario">
-            <span class="text-red-500 text-sm">
-                Debe de ser en formato de nombre y apellido
-            </span>
+                   placeholder="Nombre del usuario" formControlName="name">
+            @if (formUtils.isErrorField(myFormRegister, "name")) {
+                <span class="text-red-500 text-sm">
+                    {{ formUtils.getMessageError(myFormRegister, "name") }}
+                </span>
+            }
         </div>
 
         <!-- Email -->
@@ -20,10 +22,13 @@
             <label class="text-sm font-medium">Email</label>
             <input type="email"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Email del usuario">
-            <span class="text-red-500 text-sm">
-                mensaje de error del email
-            </span>
+                   placeholder="Email del usuario" 
+                   formControlName="email">
+            @if (formUtils.isErrorField(myFormRegister, "email")) {
+                <span class="text-red-500 text-sm">
+                    {{ formUtils.getMessageError(myFormRegister, "email") }}
+                </span>
+            }
         </div>
 
         <!-- Username -->
@@ -31,10 +36,13 @@
             <label class="text-sm font-medium">Username</label>
             <input type="text"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Nombre código del usuario">
-            <span class="text-red-500 text-sm">
-                 El username no puede ser Strider
-            </span>
+                   placeholder="Nombre código del usuario"
+                   formControlName="username">
+            @if (formUtils.isErrorField(myFormRegister, "username")) {   
+                <span class="text-red-500 text-sm">
+                    {{ formUtils.getMessageError(myFormRegister, "username") }}
+                </span>
+            }
         </div>
 
         <!-- Password -->
@@ -42,10 +50,14 @@
             <label class="text-sm font-medium">Password</label>
             <input type="password"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Password de su cuenta">
-            <span class="text-red-500 text-sm">
-                 La contraseña debe de ser mayor de 6 caracteres.
-            </span>
+                   placeholder="Password de su cuenta"
+                   formControlName="password">
+            @if (formUtils.isErrorField(myFormRegister, "password")) {
+                <span class="text-red-500 text-sm">
+                    {{ formUtils.getMessageError(myFormRegister, "password") }}
+                </span>
+            }   
+
         </div>
 
         <!-- Password2 -->
@@ -53,10 +65,13 @@
             <label class="text-sm font-medium">Confirmar</label>
             <input type="password"
                    class="border border-gray-300 rounded p-2"
-                   placeholder="Confirmar la contraseña">
-            <span class="text-red-500 text-sm">
-                 Las contraseñas deben de ser iguales
-            </span>
+                   placeholder="Confirmar la contraseña"
+                   formControlName="confirmPassword">
+            @if (formUtils.isErrorField(myFormRegister, "confirmPassword")) {
+                <span class="text-red-500 text-sm">
+                    {{ formUtils.getMessageError(myFormRegister, "confirmPassword") }}
+                </span>
+            }   
         </div>
 
         <div class="flex justify-end">
@@ -70,24 +85,26 @@
 </div>
 
 <div class="mt-4 space-y-2 text-white">
-    <h2 class="text-xl font-semibold">Form Valid:</h2>
-    <h2 class="text-xl font-semibold">Form Status:</h2>
-    <h2 class="text-xl font-semibold">Form Pending:</h2>
-    <h2 class="text-xl font-semibold">Form errors</h2>
-    <pre class="text-black bg-gray-100 p-2 rounded">{{ 'formulario' | json }}</pre>
+    <h2 class="text-xl font-semibold">Form Valid: {{myFormRegister.valid}}</h2>
+    <h2 class="text-xl font-semibold">Form Status: {{myFormRegister.status}}</h2>
+    <h2 class="text-xl font-semibold">Form Pending: {{myFormRegister.pending}}</h2>
+    <h2 class="text-xl font-semibold">Form errors:</h2>
+    <pre class="text-black bg-gray-100 p-2 rounded">{{ myFormRegister.errors | json }}</pre>
+    <h2 class="text-xl font-semibold">Form value:</h2>
+    <pre class="text-black bg-gray-100 p-2 rounded">{{ myFormRegister.value | json }}</pre>
 
     <h5 class="text-lg font-medium">Nombre</h5>
-    <pre class="text-black bg-gray-100 p-2 rounded">{{ 'formulario' | json }}</pre>
+    <pre class="text-black bg-gray-100 p-2 rounded">{{ myFormRegister.controls.name.errors | json }}</pre>
 
     <h5 class="text-lg font-medium">Email</h5>
-    <pre class="text-black bg-gray-100 p-2 rounded">{{ 'formulario' | json }}</pre>
+    <pre class="text-black bg-gray-100 p-2 rounded">{{ myFormRegister.controls.email.errors | json }}</pre>
 
     <h5 class="text-lg font-medium">Username</h5>
-    <pre class="text-black bg-gray-100 p-2 rounded">{{ 'formulario' | json }}</pre>
+    <pre class="text-black bg-gray-100 p-2 rounded">{{ myFormRegister.controls.username.errors | json }}</pre>
 
     <h5 class="text-lg font-medium">Password</h5>
-    <pre class="text-black bg-gray-100 p-2 rounded">{{ 'formulario' | json }}</pre>
+    <pre class="text-black bg-gray-100 p-2 rounded">{{ myFormRegister.controls.password.errors | json }}</pre>
 
     <h5 class="text-lg font-medium">Confirmar</h5>
-    <pre class="text-black bg-gray-100 p-2 rounded">{{ 'formulario' | json }}</pre>
+    <pre class="text-black bg-gray-100 p-2 rounded">{{ myFormRegister.controls.confirmPassword.errors | json }}</pre>
 </div>
