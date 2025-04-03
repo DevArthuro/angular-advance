@@ -54,6 +54,11 @@ export class FormUtils {
           } else if (errorPattern === FormUtils.notOnlySpacesPattern) {
             return 'El campo no debe contener espacios'
           }
+          break;
+        case 'emailUsed':
+          return 'El email ya está usado'
+        case 'existUsername':
+          return 'Ese nombre de usuario ya se encuentra registrado'
       }
     }
 
@@ -70,5 +75,38 @@ export class FormUtils {
     };
   }
 
+  static sleep() {
+    return new Promise((resolver) => {
+      setTimeout(() => {
+        resolver(console.log('Send request server'));
+      }, 3000);
+    })
+  }
+
+  static async asyncEmailValidatorServer(formControl: AbstractControl) {
+
+    const field = formControl.value;
+
+    await FormUtils.sleep();
+
+    if (field === "carlos@gmail.com") {
+      return {
+        emailUsed: true,
+      }
+    }
+    return null
+  } 
+
+  static validateSpecificUsername(formControl: AbstractControl) {
+    const fieldValue = formControl.value
+
+    if (fieldValue === "carlito") {
+      return {
+        existUsername: true,
+      }
+    }
+
+    return null
+  }
   
 }

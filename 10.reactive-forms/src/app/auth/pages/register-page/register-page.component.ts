@@ -27,6 +27,7 @@ export default class RegisterPageComponent {
       email: [
         '',
         [Validators.required, Validators.pattern(FormUtils.emailPattern)],
+        [FormUtils.asyncEmailValidatorServer]
       ],
       username: [
         '',
@@ -34,6 +35,7 @@ export default class RegisterPageComponent {
           Validators.required,
           Validators.minLength(6),
           Validators.pattern(FormUtils.notOnlySpacesPattern),
+          FormUtils.validateSpecificUsername
         ],
       ],
       password: ['', [Validators.required, Validators.minLength(6)]],
