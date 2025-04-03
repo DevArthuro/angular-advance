@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   ReactiveFormsModule,
   Validators,
@@ -17,31 +18,36 @@ export default class RegisterPageComponent {
 
   formUtils = FormUtils;
 
-  myFormRegister = this.fb.group({
-    name: [
-      '',
-      [Validators.required, Validators.pattern(FormUtils.namePattern)],
-    ],
-    email: [
-      '',
-      [Validators.required, Validators.pattern(FormUtils.emailPattern)],
-    ],
-    username: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.pattern(FormUtils.notOnlySpacesPattern),
+  myFormRegister = this.fb.group(
+    {
+      name: [
+        '',
+        [Validators.required, Validators.pattern(FormUtils.namePattern)],
       ],
-    ],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', [Validators.required]],
-  });
+      email: [
+        '',
+        [Validators.required, Validators.pattern(FormUtils.emailPattern)],
+      ],
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(FormUtils.notOnlySpacesPattern),
+        ],
+      ],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    {
+      validators: [FormUtils.isFieldEqualsFormError('password', 'confirmPassword')],
+    }
+  );
 
   onSaven() {
-    this.myFormRegister.markAllAsTouched()
-    if (this.myFormRegister.invalid) return 
+    this.myFormRegister.markAllAsTouched();
+    if (this.myFormRegister.invalid) return;
 
-    console.log(this.myFormRegister.value)
+    console.log(this.myFormRegister.value);
   }
 }

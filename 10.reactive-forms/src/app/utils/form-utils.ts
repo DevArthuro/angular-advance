@@ -1,4 +1,5 @@
 import {
+  AbstractControl,
   FormArray,
   FormControl,
   FormGroup,
@@ -58,4 +59,16 @@ export class FormUtils {
 
     return null;
   }
+
+  static isFieldEqualsFormError(field1: string, field2: string) {
+    return (formGroup: AbstractControl) => {
+      const field1Value = formGroup.get(field1)?.value;
+      const field2Value = formGroup.get(field2)?.value;
+
+      if (field1Value !== field2Value) return { notEqual: true };
+      return null;
+    };
+  }
+
+  
 }
