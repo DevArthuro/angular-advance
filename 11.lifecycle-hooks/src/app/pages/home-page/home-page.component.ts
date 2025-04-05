@@ -1,4 +1,4 @@
-import { afterNextRender, afterRender, Component } from '@angular/core';
+import { afterNextRender, afterRender, Component, signal } from '@angular/core';
 
 const log = (...message: string[]) => {
   console.log(
@@ -13,8 +13,29 @@ const log = (...message: string[]) => {
   templateUrl: './home-page.component.html',
 })
 export default class HomePageComponent {
+
+  traditionalProperty = ""
+  signalPropery = signal("")
+
   constructor() {
     log('llamado del constructor');
+    // Update out the context signal
+    setTimeout(() => {
+      this.signalPropery.set('juan');
+    }, 3000);
+
+    // Update out the context signal
+    setTimeout(() => {
+      this.traditionalProperty = 'pedro';
+    }, 3000);
+  }
+
+  changeSignal() {
+    this.signalPropery.set("Carlos")
+  }
+
+  changeTraditional() {
+    this.traditionalProperty = "Mark"
   }
 
   ngOnInit() {
