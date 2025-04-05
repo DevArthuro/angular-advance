@@ -1,0 +1,7 @@
+<div class="navbar flex justify-around gap-[30px] py-[20px]">
+    @for (item of routes; track item.path) {
+        <section class="text-primary font-bold" routerLinkActive="text-secondary border-b-4" [routerLinkActiveOptions]="{exact: true}">
+            <a [routerLink]="item.path">{{ item.title }}</a>
+        </section>
+    }
+</div>
