@@ -1,3 +1,13 @@
-<div #map>
+<div #map></div>
 
-</div>
+<section id="controls">
+    <h2 class="text-2xl font-bold text-black mb-2">
+        Zoom
+        <small class="text-gray-500 font-normal">
+            {{ zoom() | number: '1.0-0' }}
+        </small>
+    </h2>
+
+    <input (input)="zoom.set(+txtZoom.value)" type="range" min="0" max="19" [value]="zoom()" class="range range-primary" #txtZoom/>
+
+</section>
