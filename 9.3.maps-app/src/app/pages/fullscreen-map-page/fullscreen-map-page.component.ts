@@ -75,6 +75,14 @@ export default class FullscreenMapPageComponent {
       })
     })
 
+    map.on('load', () => {
+      console.log("loading")
+    })
+
+    map.addControl(new mapboxgl.FullscreenControl())
+    map.addControl(new mapboxgl.NavigationControl())
+    map.addControl(new mapboxgl.ScaleControl())
+
     this.map.set(map);
   }
 }
