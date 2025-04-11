@@ -9,5 +9,13 @@
     </h2>
 
     <input (input)="zoom.set(+txtZoom.value)" type="range" min="0" max="19" [value]="zoom()" class="range range-primary" #txtZoom/>
+    <h2 class="text-sm font-bold text-black mb-2">Coordenadas</h2>
+    <pre class="text-sm text-gray-500 font-normal">{{ 
+            {
 
+                latitud: coordinates().lat | number: '1.4-4',
+                longitud: coordinates().lng | number: '1.4-4'
+            } | json 
+        }}
+    </pre>
 </section>
