@@ -1,12 +1,13 @@
 import { Component, ElementRef, signal, viewChild } from '@angular/core';
 import mapboxgl, { Map } from 'mapbox-gl';
 import { environment } from '../../../environments/environment';
+import { JsonPipe } from '@angular/common';
 
 mapboxgl.accessToken = environment.MAPBOX_KEY;
 
 @Component({
   selector: 'app-markers-page',
-  imports: [],
+  imports: [JsonPipe],
   templateUrl: './markers-page.component.html',
 })
 export default class MarkersPageComponent {
@@ -20,7 +21,11 @@ export default class MarkersPageComponent {
 
   async ngAfterViewInit() {
     if (!this.element()?.nativeElement) return;
-
+    await new Promise((resolver) => {
+      setTimeout(() => {
+        resolver("finished")
+      }, 80)
+    })
     const { lng, lat } = this.coordinates();
     const map = new mapboxgl.Map({
       container: this.element()?.nativeElement,
